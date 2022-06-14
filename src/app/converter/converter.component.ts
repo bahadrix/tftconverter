@@ -75,7 +75,7 @@ export class ConverterComponent implements AfterViewInit {
 
     }
 
-    this.statusText = `Done.`;
+    this.statusText = `Done. Now you can download the code!`;
 
 
     this.downloadDisabled = false;
@@ -111,7 +111,9 @@ const unsigned short PROGMEM frame[][${results[0].hexArray.length}] = {${arrText
 
     try {
       ConverterComponent.downloadFile(text, 'frames.h');
+      this.statusText = "Download ready!"
     } catch (e: unknown) {
+      this.statusText = "Error while generating header file."
       if (e instanceof RangeError) {
         this.snack.open("Size error. Choose smaller images.", "OK")
       } else if (e instanceof Error) {
@@ -121,6 +123,7 @@ const unsigned short PROGMEM frame[][${results[0].hexArray.length}] = {${arrText
       }
 
     }
+
 
   }
 

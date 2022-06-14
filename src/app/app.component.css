@@ -9,7 +9,20 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 5vh;
-  #display: flex;
-  #justify-content: center;
-  #align-items: center;
+}
+
+.footer {
+  color: #c6c6c6;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+
+.footer a:link, a:visited, a:hover, a:active {
+  color: #c6c6c6;
+
 }
