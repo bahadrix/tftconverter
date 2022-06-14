@@ -93,7 +93,7 @@ export class ConverterComponent implements AfterViewInit {
     for (let imageIndex = 0; imageIndex < this.results!.length; imageIndex++) {
       let result = results[imageIndex];
       filenames.push(result.filename);
-      arrTexts.push(`{${result.hexArray.join(', ')}`);
+      arrTexts.push(`{${result.hexArray.join(', ')}}`);
     }
 
     const text = `
