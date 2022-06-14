@@ -3,8 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { ConverterComponent } from "./converter/converter.component";
 
 const routes: Routes = [
-  { path: 'converter', component: ConverterComponent },
-  { path: '', redirectTo: '/converter', pathMatch: 'full'},
+  { path: '', component: ConverterComponent },
+  //{ path: '', redirectTo: '/converter', pathMatch: 'full'},
 ];
 
 @NgModule({
