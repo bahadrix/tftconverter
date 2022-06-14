@@ -1,0 +1,15 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.content {
+  height: 100vh;
+  max-width: 500px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  #display: flex;
+  #justify-content: center;
+  #align-items: center;
+}

@@ -1,0 +1,25 @@
+<canvas #imageCanvas style="display: none"></canvas>
+
+<mat-card class="example-card">
+  <mat-card-title>Converter</mat-card-title>
+  <mat-card-subtitle>
+
+  </mat-card-subtitle>
+  <mat-card-content>
+    <section style="line-height: 1.5; text-align: justify">
+      <p>Select one or more files by clicking "Choose File" button. You can then download the code by clicking "Download Code" button.</p>
+      <p>Files ordered ascending by their names with natural sort algorithm. So you can modify the ordering by changing your file names first.</p>
+    </section>
+
+    <section style="padding-top: 10px;">
+      <p style="text-align: center">{{statusText}}</p>
+      <mat-progress-bar [value]="progressPercent"></mat-progress-bar>
+    </section>
+  </mat-card-content>
+  <mat-card-actions>
+    <button type="button" mat-stroked-button (click)="fileInput.click()">Choose File(s)</button>
+    <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" multiple="multiple">
+    <button #btnDownload type="button" mat-stroked-button [disabled]="downloadDisabled" (click)="onFileDownloadClick()">Download Code</button>
+
+  </mat-card-actions>
+</mat-card>
