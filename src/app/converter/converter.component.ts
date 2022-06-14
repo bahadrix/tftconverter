@@ -46,7 +46,6 @@ export class ConverterComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.canvas = this.$canvas!.nativeElement;
     this.btnDownload = this.$btnDownload!.nativeElement;
-
   }
 
   async onFileSelected($event: Event) {
@@ -76,8 +75,6 @@ export class ConverterComponent implements AfterViewInit {
     }
 
     this.statusText = `Done. Now you can download the code!`;
-
-
     this.downloadDisabled = false;
 
   }
@@ -86,7 +83,6 @@ export class ConverterComponent implements AfterViewInit {
 
     this.statusText = "Parsing..";
     const results = this.results!;
-
 
     const arrTexts: string[] = [];
     const filenames: string[] = [];
@@ -99,7 +95,7 @@ export class ConverterComponent implements AfterViewInit {
     const text = `
 /*
 * Used files with the same order:
-* - ${filenames.join("\n* -")}
+* - ${filenames.join("\n* - ")}
 */
 
 int frames=${results.length};
@@ -124,7 +120,6 @@ const unsigned short PROGMEM frame[][${results[0].hexArray.length}] = {${arrText
 
     }
 
-
   }
 
   private updateProgress() {
@@ -137,16 +132,18 @@ const unsigned short PROGMEM frame[][${results[0].hexArray.length}] = {${arrText
   }
 
   private readStatic(file: File): Promise<ReadResult> {
+    const canvas = this.canvas!;
     return new Promise<ReadResult>((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = ev => {
         const img = new Image();
         img.onload = () => {
-          const ctx = this.canvas!.getContext('2d')!;
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d')!;
           ctx.drawImage(img, 0, 0);
           const data = ctx.getImageData(0, 0, img.width, img.height);
           let arr = this.convertToCArray(data);
-
 
           let hexArray: string[] = [];
           arr.forEach(i => {
@@ -159,20 +156,23 @@ const unsigned short PROGMEM frame[][${results[0].hexArray.length}] = {${arrText
             imageWidth: img.width,
             imageHeight: img.height
           });
+          console.log({
+            filename: file.name,
+            hexArray,
+            imageWidth: img.width,
+            imageHeight: img.height}
+          )
 
         }
-
         img.src = ev.target!.result as string;
-
       }
-
       reader.readAsDataURL(file);
     });
 
   }
 
   private convertToCArray(data: ImageData): Uint16Array {
-
+    console.log(data);
     let arr: Uint16Array = new Uint16Array(data.data.length / 4);
     let k = 0;
     for (let i = 0; i < data.data.length; i++) {
