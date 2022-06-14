@@ -63,7 +63,7 @@ export class ConverterComponent implements AfterViewInit {
     for (let i = 0; i < files.length; i++) {
       let file = files[i];
       this.statusText = `Parsing ${file.name} ${i}/${files.length}`
-      console.log(`Converting ${file.name}`);
+
       if (file.type == "image/gif") {
         this.readGIF(file);
       } else if (file.type.startsWith("image/")) {
@@ -156,12 +156,7 @@ const unsigned short PROGMEM frame[][${results[0].hexArray.length}] = {${arrText
             imageWidth: img.width,
             imageHeight: img.height
           });
-          console.log({
-            filename: file.name,
-            hexArray,
-            imageWidth: img.width,
-            imageHeight: img.height}
-          )
+
 
         }
         img.src = ev.target!.result as string;
@@ -172,7 +167,7 @@ const unsigned short PROGMEM frame[][${results[0].hexArray.length}] = {${arrText
   }
 
   private convertToCArray(data: ImageData): Uint16Array {
-    console.log(data);
+
     let arr: Uint16Array = new Uint16Array(data.data.length / 4);
     let k = 0;
     for (let i = 0; i < data.data.length; i++) {
